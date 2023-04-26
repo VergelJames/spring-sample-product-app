@@ -1,0 +1,41 @@
+server:
+  port: 9000
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  health:
+    livenessState:
+      enabled: true
+    readinessState:
+      enabled: true
+##########################################################
+# Database Config
+##########################################################
+spring:
+  profiles:
+    active: loc
+  datasource:
+    url: jdbc:mysql://localhost:3306/financial_data?useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer: 
+       group-id: events
+  jpa:
+    show-sql: true
+    open-in-view: false
+    database-platform: org.hibernate.dialect.MySQLInnoDBDialect
+##########################################################
+# CORS Config
+##########################################################
+cors:
+  allowedOrigins: http://localhost:8080,http://localhost:3000,http://localhost:9001
+
+sample:
+   project:
+      kafka:
+       topic: export.product
